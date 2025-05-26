@@ -10,7 +10,7 @@ st.set_page_config(layout="wide")
 
 # === CONFIGURATION ===
 LOCATION_FILE = "Updated_Retailer_Locations_ALL.xlsx"
-LOCATION_SHEET = "Sheet1"   # your sheet name
+LOCATION_SHEET = "Sheet1"   # Update if your sheet has another name
 FINANCIAL_FILE = "retailer_financials.xlsx"
 LOGO_DIR = "logos"
 
@@ -20,7 +20,7 @@ loc_df = loc_df.loc[:, ~loc_df.columns.str.contains("^Unnamed")]
 fin_df = pd.read_excel(FINANCIAL_FILE)
 fin_df = fin_df.loc[:, ~fin_df.columns.str.contains("^Unnamed")]
 
-# === Merge on correct column names ===
+# === Merge on Retailer Name ===
 df = loc_df.merge(
     fin_df,
     left_on="Magazin",
@@ -134,4 +134,3 @@ if len(filtered_df) > 0:
     st_folium(m, width=900, height=600)
 else:
     st.warning("No data matches your filters (or no retailers have both location and financial data).")
-
